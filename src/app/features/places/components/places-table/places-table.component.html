@@ -1,0 +1,60 @@
+<ion-grid>
+  <ion-row class="header-row">
+    <ion-col size="1">#</ion-col>
+    <ion-col size="5">Nombre</ion-col>
+    <ion-col size="4">Ubicación</ion-col>
+    <ion-col size="2">Acciones</ion-col>
+  </ion-row>
+
+  @defer (when !placesData.isLoading()) { @if (placesData.error()) {
+  <ion-row>
+    <ion-col size="12" class="ion-text-center">
+      <p>Error cargando Recintos: {{ placesData.error() }}</p>
+    </ion-col>
+  </ion-row>
+  } @else { @for (place of placesData.value(); track $index) {
+  <ion-row>
+    <ion-col size="1">{{ place.id }}</ion-col>
+    <ion-col size="5">{{ place.name }}</ion-col>
+    <ion-col size="4">{{ place.location.name }}</ion-col>
+    <ion-col size="2">
+      <ion-button color="primary" (click)="editPlace(place)" size="small">
+        <ion-icon
+          ios="create-outline"
+          md="create-sharp"
+          slot="icon-only"
+        ></ion-icon>
+      </ion-button>
+      <ion-button
+        fill="outline"
+        color="danger"
+        (click)="deletePlace(place.id)"
+        size="small"
+      >
+        <ion-icon
+          ios="trash-outline"
+          md="trash-sharp"
+          slot="icon-only"
+        ></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  } @if (placesData.value()?.length === 0) {
+  <ion-row>
+    <ion-col size="12" class="ion-text-center">
+      No hay recintos disponibles.
+    </ion-col>
+  </ion-row>
+  } } } @placeholder {
+  <app-skeleton-row [rows]="5" [cellsSizes]="[1, 5, 4, 2]"></app-skeleton-row>
+  }
+</ion-grid>
+
+<app-place-modal
+  #placeEditModal
+  [locations]="locationsData.value() || []"
+  (placeCreated)="onPlaceCreated($event)"
+  (placeUpdated)="onPlaceUpdated($event)"
+  (modalClosed)="onModalClosed()"
+>
+</app-place-modal>

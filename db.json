@@ -1,0 +1,58 @@
+{
+  "locations": [
+    {
+      "id": 1,
+      "name": "Campus Central"
+    },
+    {
+      "id": 2,
+      "name": "Facultad de Ingeniería"
+    },
+    {
+      "id": 3,
+      "name": "Facultad de Medicina"
+    }
+  ],
+  "places": [
+    {
+      "id": 1,
+      "name": "Biblioteca Ing",
+      "locationId": 2
+    },
+    {
+      "id": 2,
+      "name": "Laboratorio de Física",
+      "locationId": 2
+    },
+    {
+      "id": 3,
+      "name": "Auditorio Principal",
+      "locationId": 1
+    },
+    {
+      "id": 4,
+      "name": "Sala de Anatomía",
+      "locationId": 3
+    }
+  ],
+  "devices": [
+    {
+      "id": 1,
+      "name": "Dispositivo A",
+      "utaId": "1234567890",
+      "placeId": 1
+    },
+    {
+      "id": 2,
+      "name": "Dispositivo B",
+      "utaId": "1234567890",
+      "placeId": 2
+    },
+    {
+      "id": 3,
+      "name": "Dispositivo C",
+      "utaId": "1234567890",
+      "placeId": 3
+    }
+  ]
+}

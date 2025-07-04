@@ -1,0 +1,22 @@
+.error-messages {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.error-text {
+  color: var(--ion-color-danger);
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+ion-input.ion-invalid,
+ion-select.ion-invalid {
+  --border-color: var(--ion-color-danger);
+  --color: var(--ion-color-danger);
+}
+
+form {
+  .ion-invalid.ion-touched {
+    --border-color: var(--ion-color-danger);
+  }
+}

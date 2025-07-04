@@ -1,0 +1,10 @@
+@for (row of rowsArray; track $index) {
+<ion-row>
+  @for (cell of cellsSizes; track cellIndex; let cellIndex = $index) {
+  <ion-col [size]="cell">
+    <ion-skeleton-text [animated]="true" style="height: 100%">
+    </ion-skeleton-text>
+  </ion-col>
+  }
+</ion-row>
+}
