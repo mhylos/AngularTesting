@@ -1,0 +1,3 @@
+{
+  "/devices?uid=:uid": "/devices/:uid"
+}

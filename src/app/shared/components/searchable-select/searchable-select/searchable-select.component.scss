@@ -1,0 +1,25 @@
+.disabled {
+  opacity: 0.5;
+  color: var(--ion-color-medium);
+  pointer-events: none;
+}
+
+:host {
+  display: block;
+  cursor: pointer;
+
+  &.disabled {
+    cursor: not-allowed;
+  }
+
+  .label-floating {
+    .label-text-wrapper {
+      -webkit-transform-origin: left top;
+      transform-origin: left top;
+      -webkit-transform: scale(0.75);
+      transform: scale(0.75);
+      max-width: calc(100% / 0.75);
+      transition: transform 0.2s ease-in-out;
+    }
+  }
+}

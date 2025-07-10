@@ -4,6 +4,7 @@ import {
   Place,
   PlaceCreateRequest,
   PlaceGetResponse,
+  PlaceUpdateRequest,
 } from '../models/place.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
@@ -20,15 +21,21 @@ export class PlaceService {
     );
   }
 
+  getPlaceById(id: Place['id']): Observable<PlaceGetResponse> {
+    return this.http.get<PlaceGetResponse>(
+      `${environment.apiUrl}/places/${id}?_expand=location`
+    );
+  }
+
   createPlace(place: PlaceCreateRequest): Observable<Place> {
     return this.http.post<Place>(`${environment.apiUrl}/places`, place);
   }
 
-  updatePlace(id: number, place: Place): Observable<Place> {
+  updatePlace(id: Place['id'], place: PlaceUpdateRequest): Observable<Place> {
     return this.http.put<Place>(`${environment.apiUrl}/places/${id}`, place);
   }
 
-  deletePlace(id: number): Observable<void> {
+  deletePlace(id: Place['id']): Observable<void> {
     return this.http.delete<void>(`${environment.apiUrl}/places/${id}`);
   }
 }

@@ -52,3 +52,19 @@ ion-col {
   display: flex;
   align-items: center;
 }
+
+.loading-row {
+  animation: loading-row 1.5s infinite ease-in-out;
+}
+
+@keyframes loading-row {
+  0% {
+    color: var(--ion-color-light) !important;
+  }
+  50% {
+    color: var(--ion-color-medium) !important;
+  }
+  100% {
+    color: var(--ion-color-light) !important;
+  }
+}

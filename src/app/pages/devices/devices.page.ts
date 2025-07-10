@@ -10,9 +10,9 @@ import {
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.page.html',
-  styleUrls: ['./users.page.scss'],
+  selector: 'app-devices',
+  templateUrl: './devices.page.html',
+  styleUrls: ['./devices.page.scss'],
   standalone: true,
   imports: [
     IonContent,
@@ -24,7 +24,7 @@ import { RouterOutlet } from '@angular/router';
     RouterOutlet,
   ],
 })
-export class UsersPage implements OnInit {
+export class DevicesPage implements OnInit {
   constructor() {}
 
   ngOnInit() {}

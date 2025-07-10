@@ -6,8 +6,14 @@ export interface Place {
   locationId: number;
 }
 
+export interface PlaceFormFields {
+  name: string;
+  location: Location | null;
+}
+
 export type PlaceGetResponse = Place & {
   location: Location;
 };
 
 export type PlaceCreateRequest = Omit<Place, 'id'>;
+export type PlaceUpdateRequest = Partial<Place>;

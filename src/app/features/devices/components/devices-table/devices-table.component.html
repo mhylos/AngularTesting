@@ -1,0 +1,70 @@
+<ion-button
+  fill="solid"
+  color="primary"
+  [routerLink]="['/dispositivos/ingresar']"
+>
+  <ion-icon ios="add-outline" md="add-sharp" slot="start"></ion-icon>
+  Agregar Dispositivo
+</ion-button>
+
+<ion-grid>
+  <ion-row class="header-row">
+    <ion-col size="4">Código UTA</ion-col>
+    <ion-col size="2">Tipo</ion-col>
+    <ion-col size="4">Recinto asociado</ion-col>
+    <ion-col size="2">Acciones</ion-col>
+  </ion-row>
+
+  @defer (when !devicesData.isLoading()) { @if (devicesData.error()) {
+  <ion-row>
+    <ion-col size="12" class="ion-text-center">
+      <p>Error cargando dispositivos: {{ devicesData.error() }}</p>
+    </ion-col>
+  </ion-row>
+  } @else { @for (device of devicesData.value(); track $index) {
+  <ion-row>
+    <ion-col size="4">{{ device.uid }}</ion-col>
+    <ion-col size="2">{{ device.type }}</ion-col>
+    <ion-col size="4">{{ device.place.name }}</ion-col>
+    <ion-col size="2"
+      ><ion-button
+        color="primary"
+        size="small"
+        [routerLink]="'/dispositivos/modificar/' + device.uid"
+        [disabled]="isRowLoading(device.uid)"
+      >
+        <ion-icon
+          ios="create-outline"
+          md="create-sharp"
+          slot="icon-only"
+        ></ion-icon>
+      </ion-button>
+      <ion-button
+        fill="outline"
+        color="danger"
+        size="small"
+        (click)="showDeleteAlert(device.uid)"
+        [disabled]="isRowLoading(device.uid)"
+      >
+        <ion-icon
+          ios="trash-outline"
+          md="trash-sharp"
+          slot="icon-only"
+        ></ion-icon> </ion-button
+    ></ion-col>
+  </ion-row>
+  } @if (devicesData.value()?.length === 0) {
+  <ion-row>
+    <ion-col size="12" class="ion-text-center">
+      No hay dispositivos disponibles.
+    </ion-col>
+  </ion-row>
+  } } } @placeholder {
+  <app-skeleton-row [rows]="5" [cellsSizes]="[4, 2, 4, 2]"></app-skeleton-row>
+  }
+</ion-grid>
+<ion-toast
+  [isOpen]="toast.isOpen()"
+  [message]="toast.message()"
+  [duration]="5000"
+></ion-toast>

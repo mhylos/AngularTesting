@@ -1,0 +1,77 @@
+@if (!isLoading) {
+<div [class.label-floating]="selected.length">
+  <div class="select-wrapper" part="label">
+    <div class="label-text-wrapper">
+      <ng-content></ng-content>
+    </div>
+  </div>
+  <div
+    *ngIf="selected.length"
+    [class.disabled]="isDisabled"
+    class="select-wrapper-inner"
+  >
+    <span *ngFor="let item of selected; let last = last">
+      {{ leaf(item) }}{{ last ? "" : ", " }}
+    </span>
+  </div>
+</div>
+} @else {
+<ion-skeleton-text
+  [animated]="true"
+  style="min-height: 56px"
+></ion-skeleton-text
+>}
+
+<ion-modal [isOpen]="isOpen" (willDismiss)="cancel()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">Cancelar</ion-button>
+        </ion-buttons>
+        <ion-title>
+          {{ title }}
+        </ion-title>
+        <ion-buttons slot="end" *ngIf="multiple">
+          <ion-button (click)="confirm()" [disabled]="isDisabled"
+            >Confirmar</ion-button
+          >
+        </ion-buttons>
+      </ion-toolbar>
+      <ion-toolbar>
+        <ion-searchbar
+          (ionInput)="searchbarInput($event)"
+          placeholder="Buscar"
+          debounce="1000"
+        ></ion-searchbar>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      @if (!isLoading) { @if (data.length === 0) {
+      <ion-item class="ion-text-center">
+        <ion-label>No hay resultados.</ion-label>
+      </ion-item>
+      } @else { @for (item of data; track $index) {
+      <ion-item
+        button
+        (click)="!isDisabled && select(item)"
+        [disabled]="isDisabled"
+      >
+        <ion-checkbox
+          slot="start"
+          [checked]="selected.includes(item)"
+          [disabled]="isDisabled"
+        ></ion-checkbox>
+        <ion-label>{{ leaf(item) }}</ion-label>
+      </ion-item>
+      }}} @else {
+      <ion-item class="ion-text-center" *ngFor="let i of [].constructor(5)">
+        <ion-skeleton-text
+          [animated]="true"
+          style="min-height: 56px"
+        ></ion-skeleton-text>
+      </ion-item>
+      }
+    </ion-content>
+  </ng-template>
+</ion-modal>

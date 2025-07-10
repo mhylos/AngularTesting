@@ -25,6 +25,8 @@ import {
   businessSharp,
   alertCircleOutline,
   alertCircleSharp,
+  hardwareChipOutline,
+  hardwareChipSharp,
 } from 'ionicons/icons';
 
 @Component({
@@ -51,10 +53,11 @@ import {
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Usuarios', url: '/users', icon: 'people' },
-    { title: 'Accesos', url: '/accesses', icon: 'shield' },
-    { title: 'Recintos', url: '/places', icon: 'business' },
-    { title: 'Alertas', url: '/alerts', icon: 'alert-circle' },
+    { title: 'Usuarios', url: '/usuarios', icon: 'people' },
+    { title: 'Accesos', url: '/accesos', icon: 'shield' },
+    { title: 'Recintos', url: '/recintos', icon: 'business' },
+    { title: 'Alertas', url: '/alertas', icon: 'alert-circle' },
+    { title: 'Dispositivos', url: '/dispositivos', icon: 'hardware-chip' },
   ];
   constructor() {
     addIcons({
@@ -66,6 +69,8 @@ export class AppComponent {
       businessSharp,
       alertCircleOutline,
       alertCircleSharp,
+      hardwareChipOutline,
+      hardwareChipSharp,
     });
   }
 }

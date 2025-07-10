@@ -2,12 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
+  IonButton,
   IonContent,
   IonHeader,
+  IonIcon,
   IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
-import { PlacesTableComponent } from 'src/app/features/places/components/places-table/places-table.component';
+import { RouterOutlet } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { addOutline, addSharp } from 'ionicons/icons';
 
 @Component({
   selector: 'app-places',
@@ -19,9 +23,9 @@ import { PlacesTableComponent } from 'src/app/features/places/components/places-
     IonHeader,
     IonTitle,
     IonToolbar,
+    RouterOutlet,
     CommonModule,
     FormsModule,
-    PlacesTableComponent,
   ],
 })
 export class PlacesPage implements OnInit {

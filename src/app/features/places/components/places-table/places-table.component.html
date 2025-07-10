@@ -1,3 +1,8 @@
+<ion-button fill="solid" color="primary" [routerLink]="['/recintos/ingresar']">
+  <ion-icon ios="add-outline" md="add-sharp" slot="start"></ion-icon>
+  Agregar Recinto
+</ion-button>
+
 <ion-grid>
   <ion-row class="header-row">
     <ion-col size="1">#</ion-col>
@@ -13,12 +18,17 @@
     </ion-col>
   </ion-row>
   } @else { @for (place of placesData.value(); track $index) {
-  <ion-row>
+  <ion-row [class.loading-row]="isRowLoading(place.id)">
     <ion-col size="1">{{ place.id }}</ion-col>
     <ion-col size="5">{{ place.name }}</ion-col>
     <ion-col size="4">{{ place.location.name }}</ion-col>
     <ion-col size="2">
-      <ion-button color="primary" (click)="editPlace(place)" size="small">
+      <ion-button
+        color="primary"
+        size="small"
+        [routerLink]="'/recintos/modificar/' + place.id"
+        [disabled]="isRowLoading(place.id)"
+      >
         <ion-icon
           ios="create-outline"
           md="create-sharp"
@@ -28,8 +38,9 @@
       <ion-button
         fill="outline"
         color="danger"
-        (click)="deletePlace(place.id)"
         size="small"
+        (click)="showDeleteAlert(place.id)"
+        [disabled]="isRowLoading(place.id)"
       >
         <ion-icon
           ios="trash-outline"
@@ -49,12 +60,8 @@
   <app-skeleton-row [rows]="5" [cellsSizes]="[1, 5, 4, 2]"></app-skeleton-row>
   }
 </ion-grid>
-
-<app-place-modal
-  #placeEditModal
-  [locations]="locationsData.value() || []"
-  (placeCreated)="onPlaceCreated($event)"
-  (placeUpdated)="onPlaceUpdated($event)"
-  (modalClosed)="onModalClosed()"
->
-</app-place-modal>
+<ion-toast
+  [isOpen]="toast.isOpen()"
+  [message]="toast.message()"
+  [duration]="5000"
+></ion-toast>

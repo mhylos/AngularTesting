@@ -1,0 +1,6 @@
+@if (placeId) {
+<app-place-form
+  [placeId]="placeId"
+  (onPlaceUpdated)="onPlaceUpdated()"
+></app-place-form>
+} @else { <span>No se encontró el ID del recinto.</span> }

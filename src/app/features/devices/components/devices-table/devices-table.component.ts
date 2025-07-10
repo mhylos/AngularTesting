@@ -1,5 +1,4 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { PlaceService } from '../../services/place.service';
 import { rxResource } from '@angular/core/rxjs-interop';
 import {
   IonCol,
@@ -7,7 +6,9 @@ import {
   IonRow,
   IonButton,
   IonIcon,
+  IonSkeletonText,
   IonToast,
+  IonAlert,
   AlertController,
 } from '@ionic/angular/standalone';
 import {
@@ -19,14 +20,15 @@ import {
   addSharp,
 } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import { LocationService } from '../../../locations/services/location.service';
 import { SkeletonRowComponent } from 'src/app/shared/components/skeleton-row/skeleton-row.component';
 import { RouterLinkWithHref } from '@angular/router';
-import { Place } from '../../models/place.model';
+import { DeviceService } from '../../services/device.service';
+import { Device } from '../../models/device.model';
 
 @Component({
-  selector: 'app-places-table',
-  templateUrl: './places-table.component.html',
+  selector: 'app-devices-table',
+  templateUrl: './devices-table.component.html',
+  styleUrls: ['./devices-table.component.scss'],
   imports: [
     IonCol,
     IonGrid,
@@ -40,21 +42,17 @@ import { Place } from '../../models/place.model';
     IonToast,
   ],
 })
-export class PlacesTableComponent implements OnInit {
-  placesLoading = signal<Place['id'][]>([]);
-  placesService = inject(PlaceService);
-  LocationService = inject(LocationService);
+export class DevicesTableComponent implements OnInit {
+  devicesLoading = signal<Device['uid'][]>([]);
+  devicesService = inject(DeviceService);
+
   toast = {
     isOpen: signal(false),
     message: signal(''),
   };
 
-  placesData = rxResource({
-    stream: () => this.placesService.getPlaces(),
-  });
-
-  locationsData = rxResource({
-    stream: () => this.LocationService.getLocations(),
+  devicesData = rxResource({
+    stream: () => this.devicesService.getDevices(),
   });
 
   constructor(private alertController: AlertController) {
@@ -70,35 +68,37 @@ export class PlacesTableComponent implements OnInit {
 
   ngOnInit() {}
 
-  deletePlace(placeId: Place['id']) {
-    this.placesLoading.set([...this.placesLoading(), placeId]);
+  deleteDevices(deviceId: Device['uid']) {
+    this.devicesLoading.set([...this.devicesLoading(), deviceId]);
 
-    this.placesService.deletePlace(placeId).subscribe({
+    this.devicesService.deleteDevice(deviceId).subscribe({
       next: () => {
-        this.placesData.update((places) =>
-          places?.filter((place) => place.id !== placeId)
+        this.devicesData.update((devices) =>
+          devices?.filter((device) => device.uid !== deviceId)
         );
         this.toast.isOpen.set(true);
-        this.toast.message.set(`Recinto ${placeId} eliminado correctamente.`);
+        this.toast.message.set(
+          `Dispositivo ${deviceId} eliminado correctamente.`
+        );
       },
       error: (error) => {
-        console.error('Error deleting place:', error);
-        this.placesLoading.set(
-          this.placesLoading().filter((id) => id !== placeId)
+        console.error('Error deleting device:', error);
+        this.devicesLoading.set(
+          this.devicesLoading().filter((id) => id !== deviceId)
         );
         this.toast.isOpen.set(true);
-        this.toast.message.set('Error eliminado recinto.');
+        this.toast.message.set('Error eliminado dispositivo.');
       },
     });
   }
 
-  isRowLoading(placeId: Place['id']): boolean {
-    return this.placesLoading().includes(placeId);
+  isRowLoading(deviceId: Device['uid']): boolean {
+    return this.devicesLoading().includes(deviceId);
   }
 
-  async showDeleteAlert(placeId: Place['id']) {
+  async showDeleteAlert(deviceId: Device['uid']) {
     const alert = await this.alertController.create({
-      header: '¿Está seguro de eliminar este recinto?',
+      header: '¿Está seguro de eliminar este dispositivo?',
       message: 'Esta acción no se puede deshacer.',
       buttons: [
         {
@@ -109,7 +109,7 @@ export class PlacesTableComponent implements OnInit {
           text: 'Confirmar',
           role: 'confirm',
           handler: () => {
-            this.deletePlace(placeId);
+            this.deleteDevices(deviceId);
           },
         },
       ],

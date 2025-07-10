@@ -1,0 +1,40 @@
+<form [formGroup]="placeForm">
+  <ion-list lines="none">
+    <ion-item>
+      <ion-input
+        labelPlacement="floating"
+        placeholder="Ingrese el nombre del recinto"
+        [counter]="true"
+        maxlength="20"
+        formControlName="name"
+      >
+        <div slot="label">
+          Nombre del recinto <ion-text color="danger">(Requerido)</ion-text>
+        </div>
+      </ion-input>
+    </ion-item>
+    <ion-item (click)="select.open()">
+      <app-searchable-select
+        #select
+        title="Seleccione una ubicación"
+        [data]="locationsData.value() ?? []"
+        [keyName]="'name'"
+        [formControlName]="'location'"
+        [isLoading]="locationsData.isLoading() || isLoading()"
+        (searchInput)="locationQuery.set($event)"
+        style="width: 100%"
+      >
+        <ion-label
+          >Ubicación <ion-text color="danger">(Requerido)</ion-text></ion-label
+        ></app-searchable-select
+      >
+    </ion-item>
+  </ion-list>
+  <ion-button
+    [disabled]="isLoading()"
+    type="submit"
+    [disabled]="placeForm.invalid || isLoading()"
+    (click)="onSubmit()"
+    >Guardar</ion-button
+  >
+</form>
