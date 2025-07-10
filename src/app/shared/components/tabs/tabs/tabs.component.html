@@ -1,0 +1,14 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    @for (p of appPages; track p; let i = $index) {
+    <ion-tab-button [tab]="p.title">
+      <ion-icon
+        aria-hidden="true"
+        [ios]="p.icon + '-outline'"
+        [md]="p.icon + '-sharp'"
+      ></ion-icon>
+      <ion-label>{{ p.title }}</ion-label>
+    </ion-tab-button>
+    }
+  </ion-tab-bar>
+</ion-tabs>

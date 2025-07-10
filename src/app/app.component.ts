@@ -14,6 +14,8 @@ import {
   IonLabel,
   IonRouterOutlet,
   IonRouterLink,
+  IonTab,
+  IonTabs,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -28,6 +30,7 @@ import {
   hardwareChipOutline,
   hardwareChipSharp,
 } from 'ionicons/icons';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',

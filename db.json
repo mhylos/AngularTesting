@@ -23,6 +23,16 @@
       "id": 2,
       "name": "Laboratorio de Física",
       "locationId": 2
+    },
+    {
+      "id": 3,
+      "name": "Auditorio Principal",
+      "locationId": 1
+    },
+    {
+      "name": "Sala de Anatomía",
+      "locationId": 1,
+      "id": 4
     }
   ],
   "devices": [
