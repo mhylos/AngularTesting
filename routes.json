@@ -1,3 +1,5 @@
 {
-  "/devices?uid=:uid": "/devices/:uid"
+  "/api/*": "/$1",
+  "/users/:id": "/users?rut=:id",
+  "/devices/:id": "/devices?deviceuid=:id"
 }

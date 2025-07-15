@@ -49,6 +49,34 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'ubicaciones',
+    loadComponent: () =>
+      import('./pages/locations/locations.page').then((m) => m.LocationsPage),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import(
+            './features/locations/components/location-table/location-table.component'
+          ).then((m) => m.LocationsTableComponent),
+      },
+      {
+        path: 'modificar/:id',
+        loadComponent: () =>
+          import('./pages/locations/edit-location/edit-location.page').then(
+            (m) => m.EditLocationPage
+          ),
+      },
+      {
+        path: 'ingresar',
+        loadComponent: () =>
+          import('./pages/locations/create-location/create-location.page').then(
+            (m) => m.CreateLocationPage
+          ),
+      },
+    ],
+  },
+  {
     path: 'dashboard',
     loadComponent: () =>
       import('./pages/dashboard/dashboard.page').then((m) => m.DashboardPage),

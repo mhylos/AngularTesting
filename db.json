@@ -48,22 +48,24 @@
     {
       "rut": 12345678,
       "name": "Usuario A",
-      "emails": [
-        "usuarioa@gestion.uta.cl"
-      ],
-      "activeProfiles": [
-        "Honorario"
-      ]
+      "emails": ["usuarioa@gestion.uta.cl"],
+      "activeProfiles": ["Honorario"]
     },
     {
       "rut": 87654321,
       "name": "Usuario B",
-      "emails": [
-        "usuariob@academicos.uta.cl"
-      ],
-      "activeProfiles": [
-        "Académico"
-      ]
+      "emails": ["usuariob@academicos.uta.cl"],
+      "activeProfiles": ["Académico"]
+    }
+  ],
+  "accessEvents": [
+    {
+      "id": 1,
+      "entryTime": "2023-10-01T12:00:00Z",
+      "exitTime": "2023-10-01T12:30:00Z",
+      "userId": 12345678,
+      "errorTypeId": null,
+      "deviceId": 1
     }
   ]
 }

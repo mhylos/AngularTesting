@@ -1,0 +1,27 @@
+<form [formGroup]="locationForm">
+  <ion-list lines="none">
+    <ion-item>
+      @if (isLoading()) {
+      <ion-skeleton-text style="height: 56px"></ion-skeleton-text>
+      } @else {
+      <ion-input
+        labelPlacement="floating"
+        placeholder="Ingrese el nombre de la ubicación"
+        [counter]="true"
+        maxlength="20"
+        formControlName="name"
+      >
+        <div slot="label">
+          Nombre de la ubicación <ion-text color="danger">(Requerido)</ion-text>
+        </div> </ion-input
+      >}
+    </ion-item>
+  </ion-list>
+  <ion-button
+    [disabled]="isLoading()"
+    type="submit"
+    [disabled]="locationForm.invalid || isLoading()"
+    (click)="onSubmit()"
+    >Guardar</ion-button
+  >
+</form>

@@ -29,8 +29,9 @@ import {
   alertCircleSharp,
   hardwareChipOutline,
   hardwareChipSharp,
+  locationOutline,
+  locationSharp,
 } from 'ionicons/icons';
-import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -58,6 +59,7 @@ export class AppComponent {
   public appPages = [
     { title: 'Usuarios', url: '/usuarios', icon: 'people' },
     { title: 'Accesos', url: '/accesos', icon: 'shield' },
+    { title: 'Ubicaciones', url: '/ubicaciones', icon: 'location' },
     { title: 'Recintos', url: '/recintos', icon: 'business' },
     { title: 'Alertas', url: '/alertas', icon: 'alert-circle' },
     { title: 'Dispositivos', url: '/dispositivos', icon: 'hardware-chip' },
@@ -68,6 +70,8 @@ export class AppComponent {
       peopleSharp,
       shieldOutline,
       shieldSharp,
+      locationOutline,
+      locationSharp,
       businessOutline,
       businessSharp,
       alertCircleOutline,
